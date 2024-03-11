@@ -62,7 +62,7 @@ export default function App() {
       <ScoreBoard data={{ score, timeLeft }} />
       <PlayArea playProps={{ timeLeft, timerRunning, setScore }} />
       <button className="play-button fade-in" onClick={startGame}>
-        Start Game
+        Start
       </button>
     </div>
   );
