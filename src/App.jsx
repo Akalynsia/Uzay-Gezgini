@@ -3,6 +3,7 @@ import useSound from "use-sound";
 import PlayArea from "./components/PlayArea";
 import ScoreBoard from "./components/ScoreBoard";
 import "./styles.css";
+// import { count } from "console";
 export default function App() {
   const STARTING_TIME = 60;
   const STARTING_SCORE = 0;
@@ -38,12 +39,23 @@ export default function App() {
     button.classList.remove("fade-in");
     button.classList.add("fade-out");
     button.disabled = true;
-    setTimeout(() => {
-      button.classList.remove("fade-out");
-      button.classList.add("fade-in");
-      button.disabled = false;
-      setTimerRunning(false);
-    }, STARTING_TIME * 1000);
+
+    const countdownInterval = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime > 0) {
+          return prevTime - 1;
+        } else {
+          clearInterval(countdownInterval);
+          setTimeout(() => {
+            button.classList.remove("fade-out");
+            button.classList.add("fade-in");
+            button.disabled = false;
+            setTimerRunning(false);
+          }, 1000);
+          return 0;
+        }
+      });
+    }, 1000);
   };
   return (
     <div>
